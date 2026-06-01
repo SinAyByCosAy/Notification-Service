@@ -12,8 +12,7 @@ public class UserSignupListener {
     private final EmailService emailService;
 
     @KafkaListener(
-            topics = "user-signup-topic",
-            groupId = "notification-group"
+            topics = "user-signup-topic"
     )
     public void consume(EmailMessageDto msg){
         emailService.sendWelcomeEmail(
