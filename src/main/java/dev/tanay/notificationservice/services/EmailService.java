@@ -14,7 +14,7 @@ public class EmailService {
         SimpleMailMessage mail = new SimpleMailMessage();
 
         mail.setTo(to);
-        mail.setSubject("Welcome to Product Service - Spring Boot");
+        mail.setSubject("Welcome to Product Service - Spring Boot Test");
 
         mail.setText(
                 "Hello " + name + ", welcome to our platform! Kya haal hai bhai ke?"

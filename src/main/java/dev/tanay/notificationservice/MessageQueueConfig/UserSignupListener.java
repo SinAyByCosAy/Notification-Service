@@ -1,6 +1,7 @@
 package dev.tanay.notificationservice.MessageQueueConfig;
 
-import dev.tanay.notificationservice.dtos.EmailMessageDto;
+import com.google.protobuf.InvalidProtocolBufferException;
+import dev.tanay.events.EmailMessage;
 import dev.tanay.notificationservice.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,7 +15,14 @@ public class UserSignupListener {
     @KafkaListener(
             topics = "user-signup-topic"
     )
-    public void consume(EmailMessageDto msg){
+    public void consume(
+            byte[] payload
+    ) throws InvalidProtocolBufferException {
+        EmailMessage msg =
+                EmailMessage.parseFrom(payload);
+
+        System.out.println("Message Received: "+msg);
+
         emailService.sendWelcomeEmail(
                 msg.getEmail(),
                 msg.getUsername()
